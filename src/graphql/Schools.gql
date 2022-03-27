@@ -1,0 +1,14 @@
+query NewSearchSchoolsQuery($query: SchoolSearchQuery!) {
+  newSearch {
+    schools(query: $query) {
+      edges {
+        node {
+          id
+          name
+          city
+          state
+        }
+      }
+    }
+  }
+}

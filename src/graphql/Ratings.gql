@@ -1,0 +1,57 @@
+query TeacherRatingsPageQuery($id: ID!) {
+  node(id: $id) {
+    ... on Teacher {
+      firstName
+      lastName
+      school {
+        name
+      }
+      ...TeacherInfo_teacher
+    }
+  }
+}
+
+fragment TeacherInfo_teacher on Teacher {
+  lastName
+  numRatings
+  avgRating
+  ...NameTitle_teacher
+  ...TeacherTags_teacher
+  ...NameLink_teacher
+  ...TeacherFeedback_teacher
+}
+
+fragment NameTitle_teacher on Teacher {
+  firstName
+  lastName
+  department
+  school {
+    name
+  }
+  ...TeacherDepartment_teacher
+}
+
+fragment TeacherTags_teacher on Teacher {
+  lastName
+  teacherRatingTags {
+    tagCount
+    tagName
+  }
+}
+
+fragment NameLink_teacher on Teacher {
+  lastName
+}
+
+fragment TeacherFeedback_teacher on Teacher {
+  numRatings
+  avgDifficulty
+  wouldTakeAgainPercent
+}
+
+fragment TeacherDepartment_teacher on Teacher {
+  department
+  school {
+    name
+  }
+}
