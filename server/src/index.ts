@@ -2,6 +2,16 @@ import { searchTeachers, getTeacherRatings, searchSchools } from "./api";
 
 var express = require("express");
 var app = express();
+const port = process.env.PORT || 4000;
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.get("/", async function (req, res) {
   const { teacher, school, school_id, teacher_id } = req.query;
@@ -39,6 +49,6 @@ app.get("/", async function (req, res) {
   res.send("Acceptable query params: school, teacher, school_id, teacher_id");
 });
 
-app.listen(3000, function () {
-  console.log("Example app listening on port 3000!");
+app.listen(port, function () {
+  console.log("Example app listening on port " + port);
 });
