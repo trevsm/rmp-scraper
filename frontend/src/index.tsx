@@ -1,16 +1,24 @@
 import { render } from "react-dom";
 import { useLocalStorage } from "usehooks-ts";
 import { SchoolColumn } from "./SchoolColumn";
-import { TeacherColumn } from "./TeacherColumn";
+import { TeacherColumn } from "./Teacher/TeacherColumn";
+import { School } from "./types";
 
-export interface School {
-  node?: {
-    city: string;
-    id: string;
-    name: string;
-    state: string;
-  };
-}
+const D = ({
+  num,
+  element,
+}: {
+  num: number;
+  element: (idx: number) => any;
+}) => {
+  return (
+    <>
+      {Array(num)
+        .fill(null)
+        .map((_, idx: number) => element(idx))}
+    </>
+  );
+};
 
 function App() {
   const [teacherColumns, setTeacherColumns] = useLocalStorage<string>(
@@ -43,17 +51,12 @@ function App() {
             setCurrentSchool,
           }}
         />
-        {Array(parseInt(teacherColumns))
-          .fill(null)
-          .map((_, i) => (
-            <TeacherColumn
-              key={i}
-              id={`teacherColumn${i + 1}`}
-              {...{
-                currentSchool,
-              }}
-            />
-          ))}
+        <D
+          num={parseInt(teacherColumns)}
+          element={(idx) => (
+            <TeacherColumn key={idx} id={idx} {...{ currentSchool }} />
+          )}
+        />
       </div>
     </div>
   );

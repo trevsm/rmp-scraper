@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { School } from "./index";
+import { School } from "./types";
 
 export function SchoolColumn({
   currentSchool,
