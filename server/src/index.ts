@@ -4,6 +4,10 @@ var express = require("express");
 var app = express();
 const port = process.env.PORT || 4000;
 
+if (!process.env.AUTH) {
+  throw new Error("AUTH environment variable is not set");
+}
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(

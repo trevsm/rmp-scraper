@@ -68,7 +68,7 @@ export function SchoolColumn({
       </div>
       <br />
       <ul>
-        {schools.map(({ node }, key) => (
+        {!schools.length?null:schools.map(({ node }, key) => (
           <li
             key={key}
             style={{
